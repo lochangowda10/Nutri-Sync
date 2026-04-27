@@ -1,61 +1,59 @@
-# 🍏 NutriSync: The Contextual Guardian
+# 🧠 NutriSync — AI-Powered Food Decision Engine
 
-NutriSync is a highly aesthetic, responsive Web Application designed for the **AMD Slingshot Hackathon**. It tackles the problem statement: *"Helping individuals make better food choices by leveraging contextual inputs."*
+> *An AI-powered food decision engine that helps users make healthier choices before they eat — not after.*
 
-## 🎯 The Vertical
-NutriSync targets the **Busy Student/Resident in an Urban Hub**. These individuals often suffer from decision fatigue after long lectures or work hours. Instead of falling back on easily accessible, oily takeout, NutriSync steps in as a decision-maker. 
+Built for the **AMD Slingshot Hackathon 2026**.
 
-## 🧠 Decision Logic
-NutriSync isn't just a tracker; it's a decision-engine that weighs three critical factors:
-1. **Time Availability/Fatigue:** Determines how tired the user is based on Google Calendar events (e.g., late hours or back-to-back meetings imply high fatigue).
-2. **Proximity:** Finds healthy options using the Google Maps Places API within a strict walking radius (500m).
-3. **Nutritional Value:** Recommends a high-protein/recovery meal at home vs. walking to a healthy restaurant depending on the fatigue vs. distance heuristic.
+## 🎯 Problem Statement
+Helping individuals make better food choices by leveraging contextual inputs.
 
-## 🏆 Hackathon Scoring Optimization
-This application is optimized for both Automated Code Quality Checks and Manual Review:
-- **FastAPI Backend:** Strict Pydantic type hinting and auto-generated API Documentation (`/docs`) ensures a flawless score from automated linters.
-- **Vanilla CSS Glassmorphism:** A dynamic, visually stunning frontend without heavy dependencies, wowing manual reviewers with its premium aesthetic.
-- **Geolocation API:** Automatically fetches the user's location with a single click—no manual entry needed.
+## 💡 What Makes NutriSync Different
+NutriSync is NOT a calorie counter. It's a **preventive food decision system** that influences behavior *before* unhealthy eating happens, using context-aware AI recommendations, habit tracking, and behavioral analysis.
 
-## 🚀 Local Development
+## 🚀 Core Features
 
-### 1. Installation
+### 1. 🧠 Food Decision Intelligence
+When you log food, the AI asks *why* you're eating — stress, boredom, cravings, social pressure, or genuine hunger. It detects unhealthy patterns over time.
+
+### 2. 🎯 Context-Aware Smart Recommendations
+Uses time of day, sugar budget, protein balance, previous meals, and eating history to give intelligent advice. Example: *"It's 11:30 PM, you exceeded your sugar intake today — yogurt would be better than ice cream."*
+
+### 3. 🔄 Smart Food Substitute Engine
+Instead of restricting, it recommends realistic healthier alternatives. Example: Instead of *"Don't eat pizza"*, it suggests *"Choose thin crust or try a protein wrap."*
+
+### 4. 🔥 7-Day Healthy Habit Engine
+Streak-based habit tracking: No sugary drinks, breakfast consistency, water goals, reduced late-night snacking, and daily protein completion — with visual progress.
+
+### 5. 🇮🇳 Indian Local Food Intelligence
+Database of 75+ common Indian foods (idli, dosa, biryani, poha, samosa, chai, thali meals) with culturally relevant health recommendations.
+
+### 6. 📊 Weekly AI Behavior Report
+Detects patterns: breakfast skipping, sugar cravings after 9 PM, weekend overeating, low protein on weekdays, stress eating during work hours.
+
+### 7. 📈 Measurable Impact Dashboard
+Shows health improvement metrics: healthy decisions made, sugar reduction, consistency scores, and healthier replacement adoption.
+
+## 🏗️ Tech Stack
+- **Backend:** Python / FastAPI (strict typing with Pydantic)
+- **Frontend:** Vanilla HTML/CSS/JS with Chart.js
+- **Data:** localStorage (zero-setup for judges)
+- **Deployment:** Google Cloud Run via Docker
+
+## 🚀 Quick Start
+
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
-```
-
-### 2. Configuration
-Create a `.env` file in the root directory:
-```env
-GOOGLE_PLACES_API_KEY=your_google_maps_api_key_here
-```
-*(If no key is provided, the app will use safe simulated fallback data to demonstrate the core logic seamlessly.)*
-
-### 3. Run
-```bash
 uvicorn main:app --reload
 ```
-Navigate to `http://127.0.0.1:8000` to view the app!
+Open `http://127.0.0.1:8000`
 
-## ☁️ Deployment to Google Cloud Run
-NutriSync includes a production-ready `Dockerfile` and is designed to be effortlessly deployed to GCP.
+## ☁️ Deploy to Google Cloud Run
+```bash
+gcloud run deploy nutrisync --source . --region asia-south1 --allow-unauthenticated --port 8080
+```
 
-1. **Authenticate with Google Cloud:**
-   ```bash
-   gcloud auth login
-   gcloud config set project [YOUR_PROJECT_ID]
-   ```
-2. **Build and Deploy:**
-   ```bash
-   gcloud run deploy nutrisync \
-     --source . \
-     --region us-central1 \
-     --allow-unauthenticated \
-     --port 8080
-   ```
-3. Visit the URL provided in the terminal output.
+## 🔒 Security
+API keys managed via environment variables and Google Secret Manager. No credentials stored in source code.
 
 ---
-*Built for AMD Slingshot. Keeping you healthy, one context-aware decision at a time.*
+*Built for AMD Slingshot 2026. Making healthier food decisions, one AI insight at a time.*

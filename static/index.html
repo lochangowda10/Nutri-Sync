@@ -3,64 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NutriSync - Contextual Food Assistant</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>NutriSync — AI Food Decision Engine</title>
+    <meta name="description" content="AI-powered food decision engine that helps you make healthier choices before you eat, not after.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div class="background-animation"></div>
-    
-    <div class="container">
-        <header>
-            <div class="logo">
-                <span class="icon">🍏</span>
-                <h1>NutriSync</h1>
-            </div>
-            <p class="subtitle">The Contextual Guardian for Better Food Choices</p>
-        </header>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <span class="brand-icon">🧠</span>
+            <h1>NutriSync</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#" class="nav-link active" data-tab="dashboard" id="nav-dashboard">
+                <span class="nav-icon">📊</span><span class="nav-text">Dashboard</span>
+            </a></li>
+            <li><a href="#" class="nav-link" data-tab="log" id="nav-log">
+                <span class="nav-icon">🍽️</span><span class="nav-text">Log Meal</span>
+            </a></li>
+            <li><a href="#" class="nav-link" data-tab="substitutes" id="nav-substitutes">
+                <span class="nav-icon">🔄</span><span class="nav-text">Substitutes</span>
+            </a></li>
+            <li><a href="#" class="nav-link" data-tab="report" id="nav-report">
+                <span class="nav-icon">📈</span><span class="nav-text">Weekly Report</span>
+            </a></li>
+            <li><a href="#" class="nav-link" data-tab="streaks" id="nav-streaks">
+                <span class="nav-icon">🔥</span><span class="nav-text">Habit Streaks</span>
+            </a></li>
+        </ul>
+        <div class="sidebar-footer">
+            <p>AMD Slingshot 2026</p>
+        </div>
+    </nav>
 
-        <main>
-            <div class="card location-card">
-                <h2>📍 Your Location Context</h2>
-                <p>We need your location to find the best healthy options nearby.</p>
-                <div class="button-group">
-                    <button id="btn-locate" class="primary-btn">
-                        <span class="btn-icon">🧭</span> Auto-Locate Me
-                    </button>
-                    <button id="btn-demo" class="secondary-btn">
-                        Try Demo (San Francisco)
-                    </button>
-                </div>
-                <div id="location-status" class="status-message hidden"></div>
-            </div>
-
-            <div id="loading-state" class="hidden">
-                <div class="spinner"></div>
-                <p>NutriBrain is analyzing your fatigue & proximity...</p>
-            </div>
-
-            <div id="result-card" class="card result-card hidden">
-                <div class="result-header">
-                    <h2>✨ NutriSync Recommendation</h2>
-                </div>
-                <div class="result-content">
-                    <div class="fatigue-indicator">
-                        <span class="label">Mental Fatigue Level:</span>
-                        <span id="fatigue-level" class="badge"></span>
-                    </div>
-                    <p id="fatigue-reason" class="reasoning-text"></p>
-                    <div class="recommendation-box">
-                        <p id="recommendation-text"></p>
-                    </div>
-                </div>
-                <button id="btn-reset" class="secondary-btn outline">Reset</button>
-            </div>
-        </main>
-
-        <footer>
-            <p>Built for AMD Slingshot Hackathon</p>
-        </footer>
+    <!-- Mobile Top Bar -->
+    <div class="mobile-topbar">
+        <button class="menu-toggle" id="menu-toggle">☰</button>
+        <span class="mobile-brand">🧠 NutriSync</span>
     </div>
+
+    <!-- Main Content Area -->
+    <main class="main-content" id="main-content">
+
+        <!-- ===== DASHBOARD TAB ===== -->
+        <section class="tab-content active" id="tab-dashboard">
+            <div class="page-header">
+                <h2>Good <span id="greeting-time">Morning</span>, Champion! 👋</h2>
+                <p class="subtitle">Here's your nutrition intelligence for today</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon cal-icon">🔥</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="dash-calories">0</span>
+                        <span class="stat-label">Calories Today</span>
+                    </div>
+                    <div class="stat-bar"><div class="stat-bar-fill cal-fill" id="cal-bar" style="width:0%"></div></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon protein-icon">💪</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="dash-protein">0g</span>
+                        <span class="stat-label">Protein</span>
+                    </div>
+                    <div class="stat-bar"><div class="stat-bar-fill protein-fill" id="protein-bar" style="width:0%"></div></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon sugar-icon">🍬</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="dash-sugar">0g</span>
+                        <span class="stat-label">Sugar</span>
+                    </div>
+                    <div class="stat-bar"><div class="stat-bar-fill sugar-fill" id="sugar-bar" style="width:0%"></div></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon meals-icon">🍽️</div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="dash-meals">0</span>
+                        <span class="stat-label">Meals Logged</span>
+                    </div>
+                    <div class="stat-bar"><div class="stat-bar-fill meals-fill" id="meals-bar" style="width:0%"></div></div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card">
+                    <h3>📊 Health Score Trend</h3>
+                    <div class="chart-container"><canvas id="healthChart"></canvas></div>
+                </div>
+                <div class="card">
+                    <h3>🍕 Today's Meals</h3>
+                    <div id="today-meals-list" class="meals-list">
+                        <p class="empty-state">No meals logged yet. Start by logging your first meal! 🍽️</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card nudge-card" id="nudge-card">
+                <div class="nudge-icon">💡</div>
+                <p id="nudge-text">Welcome to NutriSync! Log your first meal to get personalized AI insights.</p>
+            </div>
+        </section>
+
+        <!-- ===== LOG MEAL TAB ===== -->
+        <section class="tab-content" id="tab-log">
+            <div class="page-header">
+                <h2>Log a Meal 🍽️</h2>
+                <p class="subtitle">Tell us what you're eating and why — our AI will do the rest</p>
+            </div>
+
+            <div class="card log-card">
+                <div class="form-group">
+                    <label>What are you eating?</label>
+                    <div class="search-wrapper">
+                        <input type="text" id="food-search" placeholder="Search: idli, biryani, samosa..." autocomplete="off">
+                        <div class="search-results" id="search-results"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Why are you eating this?</label>
+                    <div class="reasons-grid" id="reasons-grid"></div>
+                </div>
+
+                <button class="btn-primary" id="btn-analyze" disabled>
+                    🧠 Analyze My Choice
+                </button>
+            </div>
+
+            <!-- AI Response -->
+            <div class="card ai-response hidden" id="ai-response">
+                <div class="ai-header">
+                    <span class="ai-avatar">🤖</span>
+                    <h3>NutriSync AI Analysis</h3>
+                    <span class="severity-badge" id="severity-badge">—</span>
+                </div>
+                <div class="food-summary" id="food-summary"></div>
+                <div class="insights-list" id="insights-list"></div>
+                <div class="ai-actions">
+                    <button class="btn-secondary" id="btn-log-anyway">✅ Log This Meal</button>
+                    <button class="btn-outline" id="btn-show-subs">🔄 Show Healthier Options</button>
+                </div>
+                <div class="substitutes-inline hidden" id="subs-inline"></div>
+            </div>
+        </section>
+
+        <!-- ===== SUBSTITUTES TAB ===== -->
+        <section class="tab-content" id="tab-substitutes">
+            <div class="page-header">
+                <h2>Smart Food Substitutes 🔄</h2>
+                <p class="subtitle">Don't restrict — replace with something better</p>
+            </div>
+            <div class="card">
+                <div class="form-group">
+                    <label>Search for a food to find alternatives</label>
+                    <input type="text" id="sub-search" placeholder="e.g., Samosa, Pizza, Maggi...">
+                </div>
+                <div id="sub-results" class="sub-results"></div>
+            </div>
+        </section>
+
+        <!-- ===== WEEKLY REPORT TAB ===== -->
+        <section class="tab-content" id="tab-report">
+            <div class="page-header">
+                <h2>Weekly AI Behavior Report 📈</h2>
+                <p class="subtitle">Your personal AI nutrition coach insights</p>
+            </div>
+
+            <div class="report-metrics" id="report-metrics"></div>
+            <div class="card">
+                <h3>🔍 Behavioral Patterns Detected</h3>
+                <div id="report-patterns" class="patterns-list">
+                    <p class="empty-state">Log meals for a few days to generate your AI behavior report.</p>
+                </div>
+            </div>
+            <div class="card">
+                <h3>📊 Nutrition Breakdown</h3>
+                <div class="chart-container"><canvas id="weeklyChart"></canvas></div>
+            </div>
+        </section>
+
+        <!-- ===== STREAKS TAB ===== -->
+        <section class="tab-content" id="tab-streaks">
+            <div class="page-header">
+                <h2>Habit Streaks 🔥</h2>
+                <p class="subtitle">Build healthy habits one day at a time</p>
+            </div>
+            <div class="streaks-grid" id="streaks-grid">
+                <p class="empty-state">Loading streaks...</p>
+            </div>
+
+            <div class="card">
+                <h3>📈 Impact Dashboard</h3>
+                <div class="impact-grid" id="impact-grid"></div>
+            </div>
+        </section>
+    </main>
 
     <script src="/static/app.js"></script>
 </body>
