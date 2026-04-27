@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+    <!-- Accessibility: Skip Navigation -->
+    <a href="#main-content" class="skip-link" aria-label="Skip to main content">Skip to main content</a>
     <!-- Sidebar Navigation -->
-    <nav class="sidebar" id="sidebar">
+    <nav class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
         <div class="sidebar-brand">
             <span class="brand-icon">🧠</span>
             <h1>NutriSync</h1>
@@ -46,7 +48,7 @@
     </div>
 
     <!-- Main Content Area -->
-    <main class="main-content" id="main-content">
+    <main class="main-content" id="main-content" role="main" aria-label="Main content">
 
         <!-- ===== DASHBOARD TAB ===== -->
         <section class="tab-content active" id="tab-dashboard">
@@ -121,7 +123,7 @@
                 <div class="form-group">
                     <label>What are you eating?</label>
                     <div class="search-wrapper">
-                        <input type="text" id="food-search" placeholder="Search: idli, biryani, samosa..." autocomplete="off">
+                        <input type="text" id="food-search" placeholder="Search: idli, biryani, samosa..." autocomplete="off" aria-label="Search for food items" role="searchbox">
                         <div class="search-results" id="search-results"></div>
                     </div>
                 </div>
@@ -131,7 +133,7 @@
                     <div class="reasons-grid" id="reasons-grid"></div>
                 </div>
 
-                <button class="btn-primary" id="btn-analyze" disabled>
+                <button class="btn-primary" id="btn-analyze" disabled aria-label="Analyze food choice with AI">
                     🧠 Analyze My Choice
                 </button>
             </div>

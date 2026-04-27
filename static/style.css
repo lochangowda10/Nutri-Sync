@@ -539,6 +539,27 @@ input[type="text"]::placeholder { color: var(--text-muted); }
 .red { color: var(--accent-red); }
 .purple { color: var(--accent-purple); }
 
+/* ===== ACCESSIBILITY ===== */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    background: var(--accent-green);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    z-index: 999;
+    font-weight: 700;
+    border-radius: 0 0 var(--radius-sm) 0;
+    text-decoration: none;
+}
+
+.skip-link:focus { top: 0; }
+
+*:focus-visible {
+    outline: 2px solid var(--accent-green);
+    outline-offset: 2px;
+}
+
 /* ===== UTILITIES ===== */
 .hidden { display: none !important; }
 
