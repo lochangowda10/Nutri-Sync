@@ -10,6 +10,66 @@ document.addEventListener('DOMContentLoaded', () => {
     let healthChart = null;
     let weeklyChart = null;
 
+    // ==========================================
+    // DEMO DATA SEEDING (First Visit)
+    // ==========================================
+    function seedDemoData() {
+        const today = new Date();
+        const meals = [];
+        const sampleMeals = [
+            { food_name: 'Idli (2 pcs)', calories: 130, protein: 4, sugar: 1, fat: 1, health_score: 9, category: 'breakfast', reason: 'hunger', hour: 8 },
+            { food_name: 'Dal Rice', calories: 350, protein: 12, sugar: 2, fat: 8, health_score: 8, category: 'lunch', reason: 'hunger', hour: 13 },
+            { food_name: 'Samosa (2 pcs)', calories: 350, protein: 5, sugar: 3, fat: 22, health_score: 3, category: 'snack', reason: 'craving', hour: 16 },
+            { food_name: 'Dal Tadka + Roti', calories: 320, protein: 14, sugar: 3, fat: 10, health_score: 8, category: 'dinner', reason: 'hunger', hour: 20 },
+            { food_name: 'Poha', calories: 180, protein: 4, sugar: 2, fat: 5, health_score: 8, category: 'breakfast', reason: 'routine', hour: 9 },
+            { food_name: 'Chicken Biryani', calories: 500, protein: 25, sugar: 3, fat: 18, health_score: 5, category: 'lunch', reason: 'social', hour: 14 },
+            { food_name: 'Chai (with sugar)', calories: 80, protein: 2, sugar: 10, fat: 3, health_score: 5, category: 'beverage', reason: 'routine', hour: 17 },
+            { food_name: 'Maggi Noodles', calories: 350, protein: 8, sugar: 3, fat: 14, health_score: 3, category: 'snack', reason: 'latenight', hour: 22 },
+            { food_name: 'Oats Porridge', calories: 150, protein: 5, sugar: 3, fat: 3, health_score: 9, category: 'breakfast', reason: 'hunger', hour: 8 },
+            { food_name: 'Rajma Chawal', calories: 400, protein: 14, sugar: 3, fat: 10, health_score: 7, category: 'lunch', reason: 'hunger', hour: 13 },
+            { food_name: 'Cold Drink / Soda', calories: 140, protein: 0, sugar: 35, fat: 0, health_score: 1, category: 'beverage', reason: 'craving', hour: 15 },
+            { food_name: 'Khichdi', calories: 250, protein: 8, sugar: 2, fat: 6, health_score: 9, category: 'dinner', reason: 'hunger', hour: 19 },
+            { food_name: 'Vada Pav', calories: 350, protein: 6, sugar: 4, fat: 18, health_score: 3, category: 'snack', reason: 'convenience', hour: 16 },
+            { food_name: 'Sprouts Chaat', calories: 150, protein: 8, sugar: 3, fat: 3, health_score: 9, category: 'snack', reason: 'hunger', hour: 11 },
+            { food_name: 'Chole Bhature', calories: 500, protein: 12, sugar: 5, fat: 25, health_score: 3, category: 'breakfast', reason: 'social', hour: 10 },
+            { food_name: 'Buttermilk / Chaas', calories: 40, protein: 2, sugar: 2, fat: 1, health_score: 9, category: 'beverage', reason: 'hunger', hour: 14 },
+            { food_name: 'Paneer Butter Masala + Naan', calories: 550, protein: 18, sugar: 5, fat: 28, health_score: 4, category: 'dinner', reason: 'social', hour: 21 },
+            { food_name: 'Green Tea', calories: 5, protein: 0, sugar: 0, fat: 0, health_score: 10, category: 'beverage', reason: 'routine', hour: 7 },
+            { food_name: 'Dosa (plain)', calories: 170, protein: 4, sugar: 2, fat: 5, health_score: 7, category: 'breakfast', reason: 'hunger', hour: 9 },
+            { food_name: 'Gulab Jamun (2 pcs)', calories: 300, protein: 3, sugar: 35, fat: 12, health_score: 2, category: 'dessert', reason: 'emotional', hour: 22 },
+        ];
+        for (let d = 6; d >= 0; d--) {
+            const date = new Date(today);
+            date.setDate(today.getDate() - d);
+            const dateStr = date.toISOString().split('T')[0];
+            const dayMeals = d === 0
+                ? sampleMeals.slice(0, 3)
+                : sampleMeals.slice((d * 3) % sampleMeals.length, ((d * 3) % sampleMeals.length) + 3);
+            dayMeals.forEach(m => {
+                const isWeekend = date.getDay() === 0 || date.getDay() === 6;
+                meals.push({ ...m, date: dateStr, is_weekend: isWeekend });
+            });
+        }
+        localStorage.setItem('nutrisync_meals', JSON.stringify(meals));
+        localStorage.setItem('nutrisync_seeded', 'true');
+    }
+
+    if (!localStorage.getItem('nutrisync_seeded')) {
+        seedDemoData();
+    }
+
+    // Reset demo
+    const resetBtn = document.getElementById('btn-reset-demo');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            localStorage.removeItem('nutrisync_meals');
+            localStorage.removeItem('nutrisync_seeded');
+            seedDemoData();
+            refreshDashboard();
+            alert('✅ Demo data has been reset!');
+        });
+    }
+
     // === DOM References ===
     const navLinks = document.querySelectorAll('.nav-link');
     const tabs = document.querySelectorAll('.tab-content');

@@ -105,10 +105,49 @@ body {
 .nav-icon { font-size: 1.2rem; }
 
 .sidebar-footer {
-    padding: 1rem 1.5rem;
+    padding: 1rem 0.75rem;
     border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.demo-badge {
     font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent-green);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.4rem 0.75rem;
+    background: rgba(16,185,129,0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.btn-reset-demo {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border-light);
     color: var(--text-muted);
+    font-size: 0.78rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: var(--transition);
+    width: 100%;
+}
+
+.btn-reset-demo:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
+
+.hackathon-notice {
+    margin-top: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(245,158,11,0.1);
+    border: 1px solid rgba(245,158,11,0.25);
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    color: #fcd34d;
+    line-height: 1.5;
 }
 
 /* ===== MOBILE TOP BAR ===== */
