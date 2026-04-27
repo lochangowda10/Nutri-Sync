@@ -8,25 +8,21 @@ class GoogleAPIService:
         # In a full implementation, we'd initialize the Google Calendar OAuth client here.
         # For this prototype/hackathon scope, we will simulate the calendar events if no key is found.
 
-    def fetch_calendar_fatigue_context(self) -> str:
+    def fetch_calendar_fatigue_context(self) -> tuple[str, str]:
         """
         Connects to Google Calendar API to read today's events.
         Determines mental fatigue based on total hours of events.
         """
-        # Hackathon Prototype Logic: If we had OAuth setup, we'd do:
-        # service = build('calendar', 'v3', credentials=creds)
-        # events = service.events().list(...).execute()
-        
-        # Here we simulate calendar retrieval based on the hour of the day.
+        # Hackathon Prototype Logic: Simulate calendar retrieval
         current_hour = datetime.datetime.now().hour
         
         # Simple heuristic for prototype: Late in the day = high fatigue
         if current_hour >= 17:
-            return "high"
+            return "high", f"It's {current_hour}:00. After a full day of work/lectures, your mental bandwidth is low."
         elif 12 <= current_hour < 17:
-            return "medium"
+            return "medium", f"It's {current_hour}:00. You've completed half your day; focus is starting to dip."
         else:
-            return "low"
+            return "low", f"It's {current_hour}:00. You're in your peak productivity window with fresh energy."
 
     def find_nearby_healthy_food(self, lat: float, lng: float, radius: int = 500) -> list:
         """

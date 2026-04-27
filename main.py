@@ -31,6 +31,7 @@ class LocationRequest(BaseModel):
 
 class RecommendationResponse(BaseModel):
     fatigue_level: str
+    fatigue_reason: str
     decision: str
 
 @app.get("/")
@@ -46,7 +47,7 @@ async def evaluate_context(request: LocationRequest):
     """
     try:
         # 1. Fetch Context
-        fatigue_level = google_service.fetch_calendar_fatigue_context()
+        fatigue_level, fatigue_reason = google_service.fetch_calendar_fatigue_context()
         
         # 2. Scan for options
         nearby_options = google_service.find_nearby_healthy_food(request.lat, request.lng)
@@ -56,6 +57,7 @@ async def evaluate_context(request: LocationRequest):
         
         return RecommendationResponse(
             fatigue_level=fatigue_level,
+            fatigue_reason=fatigue_reason,
             decision=decision
         )
     except Exception as e:

@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusMessage = document.getElementById('location-status');
     
     const fatigueLevelEl = document.getElementById('fatigue-level');
+    const fatigueReasonEl = document.getElementById('fatigue-reason');
     const recommendationTextEl = document.getElementById('recommendation-text');
 
     const API_URL = '/api/evaluate';
@@ -83,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Populate Data
             fatigueLevelEl.textContent = data.fatigue_level;
             fatigueLevelEl.className = `badge ${data.fatigue_level}`;
+            fatigueReasonEl.textContent = data.fatigue_reason;
             recommendationTextEl.textContent = data.decision;
 
             // Show Results
