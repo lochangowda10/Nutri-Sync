@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriSync - Contextual Food Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="icon">🍏</span>
+                <h1>NutriSync</h1>
+            </div>
+            <p class="subtitle">The Contextual Guardian for Better Food Choices</p>
+        </header>
+
+        <main>
+            <div class="card location-card">
+                <h2>📍 Your Location Context</h2>
+                <p>We need your location to find the best healthy options nearby.</p>
+                <div class="button-group">
+                    <button id="btn-locate" class="primary-btn">
+                        <span class="btn-icon">🧭</span> Auto-Locate Me
+                    </button>
+                    <button id="btn-demo" class="secondary-btn">
+                        Try Demo (San Francisco)
+                    </button>
+                </div>
+                <div id="location-status" class="status-message hidden"></div>
+            </div>
+
+            <div id="loading-state" class="hidden">
+                <div class="spinner"></div>
+                <p>NutriBrain is analyzing your fatigue & proximity...</p>
+            </div>
+
+            <div id="result-card" class="card result-card hidden">
+                <div class="result-header">
+                    <h2>✨ NutriSync Recommendation</h2>
+                </div>
+                <div class="result-content">
+                    <div class="fatigue-indicator">
+                        <span class="label">Mental Fatigue Level:</span>
+                        <span id="fatigue-level" class="badge"></span>
+                    </div>
+                    <div class="recommendation-box">
+                        <p id="recommendation-text"></p>
+                    </div>
+                </div>
+                <button id="btn-reset" class="secondary-btn outline">Reset</button>
+            </div>
+        </main>
+
+        <footer>
+            <p>Built for AMD Slingshot Hackathon</p>
+        </footer>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

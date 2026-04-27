@@ -1,0 +1,17 @@
+{
+  "fatigue_thresholds": {
+    "high": "Suggest recovery meal if no extremely close vendors exist.",
+    "low": "Encourage walking to a healthy vendor if available."
+  },
+  "recovery_meals": [
+    "Oats, Peanut Butter, and Banana (Quick Carbs & Protein)",
+    "Scrambled Eggs with Spinach (High Protein & Iron)",
+    "Greek Yogurt with Mixed Berries and Almonds (Probiotics & Antioxidants)"
+  ],
+  "general_tips": [
+    "Drink a glass of water before deciding what to eat.",
+    "Avoid heavy carb meals if you have more work to do.",
+    "A 10-minute walk can help reset your appetite."
+  ],
+  "distance_limit_meters": 500
+}
